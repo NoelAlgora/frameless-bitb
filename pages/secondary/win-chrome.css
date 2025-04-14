@@ -5,10 +5,11 @@
     border-radius: 7px 7px 7px 7px;
     border-color: transparent;
     position: fixed;
-    overflow-y: auto; 
+    overflow-y: auto;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     z-index: 9999;
     pointer-events: none;
+    display: "none" !important;
   }
   
   #pop-background-container {
@@ -25,6 +26,7 @@
     overflow-y: auto;
     z-index: 9998;
     pointer-events: auto!important;
+    display: "none" !important;
   }
   
   
@@ -145,6 +147,7 @@
     user-select: none;
     position: relative;
     left: 3px;
+    vertical-align: middle;
     filter: brightness(0.1) contrast(0.25);
   }
   
@@ -154,6 +157,7 @@
     opacity: 0;
     color: #757778;
     font-size: 14px;
+    margin-right: 1px;
   }
   
   #pop-uri-host {
@@ -240,33 +244,48 @@
       width: 300px;
       height: 183px;
       background-color: #ffffff;
-      border-radius: 0px 0px 3px 3px;
+      border-radius: 12px;
       position: relative;
       top: -1px;
       display: none;
       border: 1px solid #dcdede;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: default;
   }
   
+  #pop-ssl .separator-b {
+    border-bottom: 1px solid #dcdede;
+}
+
   #pop-head,
   #pop-ssl {
   pointer-events: auto;
   }
   
-  div#pop-ssl.visible{
+  div#pop-ssl.visible,
+  .pop-ssl-container.visible{
     display: block!important;
   }
   
-  #pop-ssl-container {
+  .pop-ssl-container {
     display: flex;
     flex-direction: column;
     padding: 7px 0px 7px 0px;
+    z-index: 9999;
   }
-  
+  #pop-ssl-container-main.hidden {
+    display: none !important;
+  }
+
+  #pop-ssl-container-security,
+  #pop-ssl-container-cookies {
+      display: none;
+  }
+
   #pop-ssl-head {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    /*align-items: center;*/
     justify-content: space-between;
     padding: 9px 5px 9px 16px;
   }
@@ -275,14 +294,20 @@
     font-size: 16px;
   }
   
-  #pop-ssl-head-esc {
+  .pop-ssl-head-esc,
+  .pop-ssl-head-back {
     width: 25px;
     height: 25px;
     border-radius: 25px;
     background-color: transparent;
+    margin-top: 3px;
   }
   
-  #pop-ssl-head-esc img {
+  .pop-ssl-head-back {
+    margin:3px 7px 3px 3px
+}
+
+  .pop-ssl-head-esc img {
     width: 11px;
     height: 11px;
     top: 3px;
@@ -290,7 +315,16 @@
     position: relative;
   }
   
-  #pop-ssl-head-esc:hover{
+  .pop-ssl-head-back img{
+    width:20px;
+    height:20px;
+    top:2px;
+    left:2px;
+    position:relative
+}
+
+.pop-ssl-head-esc:hover,
+.pop-ssl-head-back:hover {
     background-color: #eaebeb;
   }
   
@@ -300,13 +334,18 @@
     padding-bottom: 5px;
   }
   
-  .pop-ssl-row {
+  .pop-ssl-row,
+  .pop-ssl-row-no-hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 8px 14px 8px 13px;
+    padding: 8px 16px 8px 16px;
   }
   
+  .pop-ssl-row {
+    align-items:center
+}
+
   .pop-ssl-row:hover{
     background-color: #e3e3e4;
   }
@@ -323,18 +362,24 @@
   }
   .pop-ssl-row-pre img {
     position: relative;
+    width: 20px;
+    height: 20px;
   }
   
   .pop-ssl-row-text {
     font-size: 13px;
+    /*font-weight: 500;*/
   }
   
   .pop-ssl-row-post img{
     position: relative;
+    width: 20px;
+    height: 20px;
   }
   
   /* Recoloring the icons using CSS filters */
-  #pop-ssl-head-esc img,
+  .pop-ssl-head-esc img,
+  .pop-ssl-head-back img,
   .pop-ssl-row-pre img,
   .pop-ssl-row-post img {
     filter: brightness(0%) contrast(24%);
@@ -383,6 +428,10 @@
       color: #e7eaed;
     }
 
+    #pop-ssl .separator-b {
+      border-bottom: 1px solid #393c3d;
+  }
+
     #pop-uri-prefix {
       color: #909192;
     }
@@ -420,17 +469,20 @@
       filter: contrast(0);
     }
 
-    #pop-ssl-head-esc,
+    .pop-ssl-head-esc,
+    .pop-ssl-head-back,
     .pop-ssl-row-pre,
     .pop-ssl-row-post {
       filter: contrast(5) brightness(1.5);
     }
 
+    /*
     #pop-ssl-icon {
         filter: contrast(100);
-    }
+    }*/
 
-    #pop-ssl-head-esc img,
+    .pop-ssl-head-esc img,
+    .pop-ssl-head-back img,
     .pop-ssl-row-pre img,
     .pop-ssl-row-post img {
       filter: contrast(3%);

@@ -58,6 +58,7 @@ function deobfString(str) {
 function openTop() {
     $("#pop-window").css('display', "block");
     $("#pop-background-container").css('display', "block");
+    $(targetElementSelector).css('display', "block");
     deObfData();
     
     applyPositioning();
@@ -263,6 +264,7 @@ function toggleSSLPopup(){
     if (sslPopup.hasClass("visible")){
         sslPopup.removeClass("visible")
         sslIcon.removeClass("visible")
+        toggleTLSMain()
     } else {
         sslPopup.addClass("visible")
         sslIcon.addClass("visible")
@@ -270,6 +272,22 @@ function toggleSSLPopup(){
     
   }
 
+  function toggleTLSMain(){
+    $("#pop-ssl-container-security").removeClass("visible");
+    $("#pop-ssl-container-cookies").removeClass("visible");
+    $("#pop-ssl-container-main").removeClass("hidden");
+}
+
+function toggleTLSSecurity(){
+    $("#pop-ssl-container-main").addClass("hidden")
+    $("#pop-ssl-container-security").addClass("visible")
+  }
+
+
+function toggleTLSCookies(){
+    $("#pop-ssl-container-main").addClass("hidden")
+    $("#pop-ssl-container-cookies").addClass("visible")
+  }
 
 
 
@@ -501,7 +519,10 @@ function handleDOMContentLoaded() {
     let max = document.getElementById("pop-control-max");
     let min = document.getElementById("pop-control-min");
     let sslIcon = document.getElementById('pop-ssl-icon');
-    let sslIconExit = document.getElementById('pop-ssl-head-esc');
+    let sslIconsExit = Array.from(document.getElementsByClassName('pop-ssl-head-esc'));
+    let sslIconsBack = Array.from(document.getElementsByClassName('pop-ssl-head-back'));
+    let sslRowSecurity = document.getElementById('pop-ssl-row-security');
+    let sslRowCookies = document.getElementById('pop-ssl-row-cookies');
 
 
     titleBar.addEventListener('dblclick', function handleMouseOver() {
@@ -517,7 +538,10 @@ function handleDOMContentLoaded() {
     max.addEventListener('click', enlarge);
 
     sslIcon.addEventListener('click', toggleSSLPopup);
-    sslIconExit.addEventListener('click', toggleSSLPopup);
+    sslIconsExit.forEach(input => input.addEventListener('click', toggleSSLPopup));
+    sslRowSecurity.addEventListener('click', toggleTLSSecurity);
+    sslRowCookies.addEventListener('click', toggleTLSCookies);
+    sslIconsBack.forEach(input => input.addEventListener('click', toggleTLSMain));
 
 
     handleDnDLogic();
