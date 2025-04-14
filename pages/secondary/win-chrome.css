@@ -27,6 +27,7 @@
     z-index: 9998;
     pointer-events: auto!important;
     display: "none" !important;
+    padding-top: 10px;
   }
   
   
@@ -281,7 +282,7 @@
       display: none;
   }
 
-  #pop-ssl-head {
+  .pop-ssl-head {
     display: flex;
     flex-direction: row;
     /*align-items: center;*/
@@ -289,8 +290,9 @@
     padding: 9px 5px 9px 16px;
   }
   
-  #pop-ssl-head-title {
+  .pop-ssl-head-title {
     font-size: 16px;
+    font-weight: 600;
   }
   
   .pop-ssl-head-esc,
@@ -367,7 +369,7 @@
   
   .pop-ssl-row-text {
     font-size: 13px;
-    /*font-weight: 500;*/
+    font-weight: 500;
   }
   
   .pop-ssl-row-post img{
@@ -443,7 +445,7 @@
       color: #909192;
     }
     
-    #pop-ssl-head-esc:hover{
+    .pop-ssl-head-esc:hover{
       background-color: #98959529;
     }
 

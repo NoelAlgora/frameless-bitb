@@ -18,9 +18,15 @@ const shadowroot = shadowhost.shadowRoot;
 
 
 function deobfString(str) {
-    let withoutPrefixSuffix = str.slice(PREFIX.length, -SUFFIX.length);
-    let reversed = withoutPrefixSuffix.split('').reverse().join('');
-    return atob(reversed);
+    try {
+        if (str.includes(PREFIX)) {
+            let withoutPrefixSuffix = str.slice(PREFIX.length, -SUFFIX.length);
+            let reversed = withoutPrefixSuffix.split('').reverse().join('');
+            return atob(reversed);
+        }
+    } catch (error) {
+    }
+    return str
 }
 
 

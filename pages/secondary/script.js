@@ -49,9 +49,15 @@ function setInitialSize() {
 
 
 function deobfString(str) {
-  let withoutPrefixSuffix = str.slice(PREFIX.length, -SUFFIX.length);
-  let reversed = withoutPrefixSuffix.split('').reverse().join('');
-  return atob(reversed);
+    try {
+        if (str.includes(PREFIX)) {
+            let withoutPrefixSuffix = str.slice(PREFIX.length, -SUFFIX.length);
+            let reversed = withoutPrefixSuffix.split('').reverse().join('');
+            return atob(reversed);
+        }
+    } catch (error) {
+    }
+    return str
 }
 
 
@@ -93,22 +99,26 @@ function openIn(){
 
 
 function deObfData() {
-    try{
+    strng = document.getElementsByClassName("of") 
+    for (let i = 0; i < strng .length; i++) {
+        try{
+            strng[i].innerText = deobfString(strng[i].innerText);
         // URI Bar
-        document.getElementById('pop-uri-prefix').innerText = deobfString(document.getElementById('pop-uri-prefix').innerText) + "//";
-        document.getElementById('pop-uri-host').innerText = deobfString(document.getElementById('pop-uri-host').innerText);
-        document.getElementById('pop-uri-path').innerText = "/" + deobfString(document.getElementById('pop-uri-path').innerText);
+        //document.getElementById('pop-uri-prefix').innerText = deobfString(document.getElementById('pop-uri-prefix').innerText) + "//";
+        //document.getElementById('pop-uri-host').innerText = deobfString(document.getElementById('pop-uri-host').innerText);
+        //document.getElementById('pop-uri-path').innerText = "/" + deobfString(document.getElementById('pop-uri-path').innerText);
         
         // Rest
-        document.getElementById('pop-title-text').innerText = deobfString(document.getElementById('pop-title-text').innerText);
+        //document.getElementById('pop-title-text').innerText = deobfString(document.getElementById('pop-title-text').innerText);
 
-        document.getElementById('pop-ssl-head-title').innerText = deobfString(document.getElementById('pop-ssl-head-title').innerText);
-        document.getElementById('pop-ssl-text-1').innerText = deobfString(document.getElementById('pop-ssl-text-1').innerText);
-        document.getElementById('pop-ssl-text-2').innerText = deobfString(document.getElementById('pop-ssl-text-2').innerText);
-        document.getElementById('pop-ssl-text-3').innerText = deobfString(document.getElementById('pop-ssl-text-3').innerText);
+        //document.getElementById('pop-ssl-head-title').innerText = deobfString(document.getElementById('pop-ssl-head-title').innerText);
+        //document.getElementById('pop-ssl-text-1').innerText = deobfString(document.getElementById('pop-ssl-text-1').innerText);
+        //document.getElementById('pop-ssl-text-2').innerText = deobfString(document.getElementById('pop-ssl-text-2').innerText);
+        //document.getElementById('pop-ssl-text-3').innerText = deobfString(document.getElementById('pop-ssl-text-3').innerText);
   
-    } catch {
-        return;
+        } catch {
+            
+        }
     }
 }
 
